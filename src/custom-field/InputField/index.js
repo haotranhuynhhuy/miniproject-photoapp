@@ -7,6 +7,8 @@ const InputField = (props) => {
         //4 thứ quan trong trong field
     const {name, value, onChange, onBlur} = field
 
+    const {errors, touched} = form
+
     return (
         <FormGroup>
             {label && <Label for={name}>{label}</Label>}
@@ -21,6 +23,7 @@ const InputField = (props) => {
             placeholder={placeholder}
             isdisabled={disable}
             />
+            {errors && touched && <p style={{color:'red', fontSize: '0.8rem'}}>{errors[name]}</p>}
         </FormGroup>
     )
 }
