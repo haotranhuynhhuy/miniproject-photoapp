@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Button} from "reactstrap"
+import { Button, Spinner} from "reactstrap"
 import './RandomPhoto.scss'
 
 const RandomPhoto = (props) => {
@@ -27,7 +27,8 @@ const RandomPhoto = (props) => {
                     color='primary'> Random a photo</Button>
             </div>
             <div className='random-photo__photo'>
-                {imageUrl && <img src={imageUrl} alt='Ooops....' />}
+                {imageUrl && <img src={imageUrl} alt='Ooops....' 
+                onError={handleRandomPhoto} />}
             </div>
         </div>
 

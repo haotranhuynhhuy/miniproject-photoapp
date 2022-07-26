@@ -1,18 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { Formik, Form, FastField } from 'formik'
-import { FormGroup, Button } from 'reactstrap';
+import { FormGroup, Button, Spinner } from 'reactstrap';
 import { PHOTO_CATEGORY_OPTIONS } from '../../../../constants/global';
 import InputField from '../../../../custom-field/InputField';
 import SelectField from '../../../../custom-field/SelectField';
 import RandomPhotoField from '../../../../custom-field/RandomPhotoField';
 import * as yup from 'yup'
+import { useParams } from 'react-router-dom';
 const PhotoForm = (props) => {
-    const initialValue = {
-        title: '',
-        categoryId: null,
-        photo: ''
-    }
+    // const initialValue = {
+    //     id: Math.trunc(Math.random() * 2000),
+    //     title: '',
+    //     categoryId: null,
+    //     photo: ''
+    // }
+    const {initialValues} = props
+    const {photoId} = useParams()
+
     const schema = yup.object().shape({
         title: yup.string().required('This field is required'),
         categoryId: yup.number().required('This field is required').nullable(),
@@ -20,14 +25,15 @@ const PhotoForm = (props) => {
     })
     return (
         <Formik
-            initialValues={initialValue}
+            initialValues={initialValues}
             validationSchema={schema}
             onSubmit ={props.onSubmit}
         >
             {
                 formikProps => {
-                    const { errors , touched} = formikProps
-                    console.log(errors , touched)
+                    //props ở trong Formik 
+                    const {isSubmitting} = formikProps
+                    
                     return (
                         <Form>
                             <FastField
@@ -47,7 +53,7 @@ const PhotoForm = (props) => {
                                 options={PHOTO_CATEGORY_OPTIONS}
                             />
                             <FastField 
-                                name='imageUrl'
+                                name='photo'
                                 component={RandomPhotoField}
 
                                 label="Photo"
@@ -55,7 +61,9 @@ const PhotoForm = (props) => {
                             
 
                             <FormGroup>
-                                <Button type='submit' color='primary'>Add to album</Button>
+                                <Button type='submit' color='primary'>
+                                    {isSubmitting && <Spinner size={'sm'} />}
+                                     {photoId?" Update": ' Add to album'}</Button>
                             </FormGroup>
                         </Form>
                     )
