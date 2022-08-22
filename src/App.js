@@ -6,7 +6,7 @@ function App() {
   const lazyPhoto = React.lazy(()=> import("./features/Photo"))
   return (
     <div className="App">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading....</div>}>
         <BrowserRouter>
           <Header />
           <Switch>
