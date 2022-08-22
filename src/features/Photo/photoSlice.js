@@ -6,7 +6,7 @@ const photoSlice = createSlice({
     reducers:{
         addPhoto: (state,action)=>{
             const newPhoto = action.payload;
-            state.push(newPhoto)
+            state.push(newPhoto) 
         },
         removePhoto: (state, action)=>{
             const foundId = action.payload;
