@@ -11,7 +11,7 @@ const userApi = {
                     email: currentUser.email,
                     photo: currentUser.photoURL
                 })
-            },500)
+            },300)
         })
     }
 }
